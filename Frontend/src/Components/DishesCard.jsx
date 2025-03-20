@@ -12,7 +12,7 @@ const DishesCard = () => {
                 return (
                     <div key ={index} className='bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300'>
                         <div className='relative'>
-                        <img src={item.image} alt={item.name} className='w-full h-48 object-cover'/>
+                        <img src={item.image} alt={item.name} className='w-full h-48 object-cover rounded-lg'/>
                         <div className='flex rounded-full absolute right-2 bottom-2 bg-white size-8 text-black text-xl font-bold justify-center shadow-lg cursor-pointer '>+</div>
                         </div>
                         <div className='p-4 text-center'>

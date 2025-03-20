@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "../assets/assets";
 
-function Navbar() {
+const Navbar= () =>{
+
+   const [menu, setMenu] = useState("home");
+
   return (
     <div className="p-7">
       <div className="flex justify-between items-center">
@@ -9,17 +12,16 @@ function Navbar() {
           <img src={assets.logo} alt="" />
         </div>
         <div>
-          <ul className="flex gap-6 text-[#808080] font-normal cursor-pointer">
-            <li className="relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0">
-              home
-            </li>
-            <li className="relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0">
-              menu
-            </li>
-            <li className="relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0">
+          <ul className="flex gap-6 text-[#49557e] font-normal cursor-pointer font-[outfit]">
+          <li onClick={()=> setMenu("home")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 
+          after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 
+          ${menu === "home" ? "active" : ""}`}>Home</li>
+            <li onClick={()=> setMenu("menu")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 
+            ${menu === "menu" ? "active" : ""}`}>menu</li>
+            <li onClick={()=> setMenu("mobile-app")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 ${menu === "mobile-app" ? "active" : ""}`}>
               mobile app
             </li>
-            <li className="relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0">
+            <li onClick={()=> setMenu("contact-us")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 ${menu === "contact-us" ? "active" : ""}`}>
               contact us
             </li>
           </ul>
@@ -28,11 +30,13 @@ function Navbar() {
           <search-icon className="cursor-pointer">
             <img src={assets.search_icon} alt="" className="w-6 h-6" />
           </search-icon>
+          <div className="relative">
           <cart-icon className="cursor-pointer">
             <img src={assets.basket_icon} alt=""  className="w-6 h-6"/>
           </cart-icon>
-          
-          <button  className="border border-[#49557E] rounded-full px-4 py-1 text-[#49557E] text-[0.9rem] hover:bg-[#49557E] hover:text-white transition">
+          <div className="absolute min-w-[10px] min-h-[10px] bg-[tomato] rounded-[5px] top-[-8px] right-[-8px] "></div>
+          </div>
+          <button  className="border border-tomato bg-transparent rounded-full px-4 py-1 text-[#49557E] text-[0.9rem] cursor:pointer transition-[0.3s] hover:bg-[#fff4f2]">
             Sign in
           </button>
         </div>
