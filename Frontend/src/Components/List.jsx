@@ -7,7 +7,7 @@ function List() {
   return (
     <div className='text-center px-6'>
         <div>
-      <p className='text-3xl font-bold text-grey-800'>Explore our menu</p>
+      <p className='text-3xl font-bold text-grey-800 mt-3'>Explore our menu</p>
       <h5 className='mt-3 text-grey-600'>Choose from a diverse menu featuring a delectable array of dishes. Our mission is to satisfy your <br />
        cravings and elevate your dining experience , one delicious meal at a time </h5>
        </div>
