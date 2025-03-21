@@ -6,6 +6,7 @@ import DishesCard from '../Components/DishesCard'
 import Footer from '../Components/Footer'
 import SignUp from './SignUp'
 import LogIn from './LogIn'
+import AppDownload from '../Components/AppDownload'
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       <DishesCard/>
       <SignUp/>
       <LogIn/>
+      <AppDownload/>
       </div>
       <Footer className="w-screen"/>
     </div>
