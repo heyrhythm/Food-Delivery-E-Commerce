@@ -15,7 +15,7 @@ const Navbar= () =>{
           <ul className="flex gap-6 text-[#49557e] font-normal cursor-pointer font-[outfit]">
           <li onClick={()=> setMenu("home")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 
           after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 
-          ${menu === "home" ? "active" : ""}`}>Home</li>
+          ${menu === "home" ? "active" : ""}`}>home</li>
             <li onClick={()=> setMenu("menu")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 
             ${menu === "menu" ? "active" : ""}`}>menu</li>
             <li onClick={()=> setMenu("mobile-app")} className={`relative after:block after:absolute after:left-1/2 after:w-0 after:h-[2px] after:bg-gray-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full hover:after:left-0 ${menu === "mobile-app" ? "active" : ""}`}>
