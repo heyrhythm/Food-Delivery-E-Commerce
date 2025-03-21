@@ -25,7 +25,7 @@ const LogIn = () => {
       <div className="flex items-center mt-4">
         <input 
           type="checkbox" 
-          id="terms" 
+          id="terms_1" 
           className="w-4 h-4 text-orange-500 border border-gray-300 rounded focus:ring-2 focus:ring-orange-500 cursor-pointer"
         />
         <label htmlFor="terms" className="text-gray-500 ml-2 text-xs">

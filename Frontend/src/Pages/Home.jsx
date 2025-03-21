@@ -10,7 +10,7 @@ import AppDownload from "../Components/AppDownload";
 
 function Home() {
   return (
-    <div className="overflow-x-hidden mt-52">
+    <div className="overflow-x-hidden mt-20">
       <div className="max-w-[90rem] mx-auto my-auto ">
         
         <Hero />
