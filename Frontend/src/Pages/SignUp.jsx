@@ -1,29 +1,61 @@
-import React from 'react'
+import React, {useState} from 'react';
+import { useNavigate,Link} from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const[formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5173/ ',formData);
+      alert("Account created successfully");
+      navigate('/');
+    } catch (error) {
+      alert(error.response?.data?.message ?? "An error occurred");
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
   <div className="w-1/3 mx-auto mt-20 mb-8 p-6 border-2 border-gray-300 rounded-lg bg-white shadow-lg">
     
-    <h3 className="font-bold text-2xl text-center mb-6 text-gray-800">Sign Up</h3>
+    <Link to='/signup' className="font-bold text-2xl text-center mb-6 text-gray-800">Sign Up</Link>
 
-    <form>
+    <form onSubmit={handleSubmit}>
       <input 
         type="text" 
         placeholder="Your Name" 
         className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-orange-500"
+        onChange={handleChange}
+        required
       />
       
       <input 
         type="email" 
         placeholder="Your Email" 
         className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-orange-500"
+        onChange={handleChange}
+        required
       />
 
       <input 
         type="password" 
         placeholder="Your Password" 
         className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-orange-500"
+        onChange={handleChange}
+        required
       />
 
       {/* Checkbox for Terms & Privacy */}
