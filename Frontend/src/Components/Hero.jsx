@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 
 const Hero = () => {
   return (
-    <div className="relative mt-7 w-full h-[550px] rounded-lg overflow-hidden">
+    <div className="relative w-full h-[550px] rounded-lg overflow-hidden">
       {/* Background Image */}
       <img
         src={assets.header_img}
