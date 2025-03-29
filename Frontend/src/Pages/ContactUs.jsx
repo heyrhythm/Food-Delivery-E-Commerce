@@ -2,7 +2,7 @@ import React from 'react'
 
 function ContactUs() {
   return (
-    <div>ContactUs</div>
+    <div className='mt-24'>ContactUs</div>
   )
 }
 

@@ -27,8 +27,8 @@ const DishesCard = () => {
 
   return (
     <div>
-      <div className="mt-10 px-6">
-        <h3 className="font-bold text-2xl text-center mb-6">
+      <div className="mt-12 px-6">
+        <h3 className="font-bold text-2xl text-center mb-9">
           Top dishes near you
         </h3>
 
