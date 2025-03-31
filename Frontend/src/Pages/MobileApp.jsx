@@ -2,7 +2,7 @@ import React from 'react'
 
 const MobileApp = () => {
   return (
-    <div>MobileApp</div>
+    <div className='mt-24'>MobileApp</div>
   )
 }
 
