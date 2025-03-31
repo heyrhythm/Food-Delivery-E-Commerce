@@ -1,0 +1,35 @@
+### Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+### Environment variables
+.env
+.env.local
+
+### Logs
+logs/
+*.log
+logs/*.log
+
+### Database files
+*.sqlite
+*.sqlite-journal
+
+### System files
+.DS_Store
+Thumbs.db
+
+### IDE files
+.vscode/
+.idea/
+*.iml
+
+### Build and Output
+/dist/
+/build/
+/out/
+
+### Miscellaneous
+*.bak
+*.swp

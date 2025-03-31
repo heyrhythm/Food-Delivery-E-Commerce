@@ -42,9 +42,11 @@ const Navbar = () => {
             <Link to="/cart"><img src={assets.basket_icon} alt="Cart" className="w-6 h-6 cursor-pointer" /></Link>
             {/* <div className="absolute min-w-[10px] min-h-[10px] bg-[tomato] rounded-full top-[-5px] right-[-5px]"></div> */}
           </div>
+          <Link to ="/signup">
           <button className="border border-tomato bg-transparent rounded-full px-4 py-1 text-[#49557E] text-[0.9rem] transition duration-300 hover:bg-[#fff4f2]">
             Sign in
           </button>
+          </Link>
         </div>
       </div>
     </nav>
