@@ -17,8 +17,8 @@ import Searchicon from "./Pages/searchIcon";
 const App = () => {
   return (
     <div>
-      <BrowserRouter>
         <Navbar />
+        
         <div className="w-[80%] mx-auto"> {/* Center the content */}
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -33,7 +33,7 @@ const App = () => {
           </Routes>
         </div>
         <Footer className="w-screen" />
-      </BrowserRouter>
+      
     </div>
   );
 };

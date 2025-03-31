@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+
 import { menu_list } from '../assets/assets';
 
-function List() {
-  const [category, setCategory] = useState("ALL");
+function List({category,setCategory}) {
+  // const [category, setCategory] = useState("ALL");
 
   return (
     <div className='mt-10'>
@@ -32,6 +32,7 @@ function List() {
       </div>
     ))}
   </div>
+  <hr className='mt-12 h-0.5 bg-[#e2e2e2] border-none mb-8' />
 </div>
   );
 }
