@@ -1,18 +1,26 @@
 const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const connectDB = require("./config/db");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require ('cors');
+const connectDB = require("./Config/db");
+const authroutes = require("./routes/userRoutes");
 
-dotenv.config(); 
-connectDB(); 
-
+dotenv.config();
 const app = express();
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
 app.use(express.json());
+app.use(cors({origin:"http://localhost:5173",
+     methods: "GET, POST , PUT , DELETE",
+     credentials: true}));
 
-app.use("/api/users", require("./routes/userRoutes"));
-const PORT = process.env.PORT || 5000;
+app.use("/api/auth", authroutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.get("/",(req,res) =>
+    {
+    res.send("API is running.....");
 });
+
+connectDB();
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

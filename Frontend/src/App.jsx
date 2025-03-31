@@ -12,6 +12,8 @@ import Navbar from "./Components/Navbar"; // Import the Navbar component
 import Footer from "./Components/Footer";
 import MobileApp from "./Pages/MobileApp";
 import ContactUs from "./Pages/ContactUs";
+import UserList from "./Components/UserList";
+import Dashboard from "./Pages/Dashboard";
 
 const App = () => {
   return (
@@ -24,9 +26,10 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/mobileapp" element={<MobileApp />} />
           <Route path="/contactus" element={<ContactUs />} />
-
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/users" element={<UserList />}/>
           <Route path="/login" element={<LogIn />} />
         </Routes>
         <Footer className="w-screen" />
