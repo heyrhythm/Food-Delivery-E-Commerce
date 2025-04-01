@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
@@ -13,8 +14,9 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <div className="max-w-[90rem] mx-auto px-6 py-4 flex justify-between items-center">
+    <>
+    <nav className=" fixed top-0 left-0 w-full bg-white shadow-md z-50">
+      <div className="max-w-[90rem] mx-auto px-6 py-4 hidden md:flex justify-between items-center">
         {/* Logo */}
         <Link to="/">
           <img src={assets.logo} alt="Logo" className="h-10" />
@@ -50,6 +52,8 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    <MobileNav/>
+    </>
   );
 };
 

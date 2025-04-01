@@ -15,6 +15,7 @@ import Searchicon from "./Pages/searchIcon";
 import UserList from "./Components/UserList";
 import Dashboard from "./Pages/Dashboard";
 import LogIn from "./Pages/LogIn";
+import Footbar from "./Components/Footbar";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/login" element={<LogIn />} />
           </Routes>
         </div>
+        <Footbar/>
     <Footer/>
     </div>
   );
