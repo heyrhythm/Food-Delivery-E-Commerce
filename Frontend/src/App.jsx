@@ -22,7 +22,7 @@ const App = () => {
       <div className="consistent-scrollbar">
         <Navbar />
         
-        <div className="w-[80%] mx-auto"> {/* Center the content */}
+        <div className="w-[90%] md:w-[80%] mx-auto"> {/* Center the content */}
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />

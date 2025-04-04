@@ -14,7 +14,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
         <img className="w-full rounded-[15px_15px_0px_0px]  "  src={image} alt="" />
         {!cartItems[id]
             ?<img className="cursor-pointer absolute bottom-1 right-1 bg-white rounded-full px-1 py-1 shadow-lg size-[35px]" onClick={()=>addToCart(id)} src={assets.add_icon_white} alt="" />
-            :<div className="absolute right-1 bottom-1 bg-white rounded-2xl text-center flex  items-center gap-2 font-semibold">
+            :<div className="absolute right-1 bottom-1 bg-white rounded-full text-center flex  items-center gap-2 font-semibold">
                 <img className="cursor-pointer size-9 p-1 " onClick={()=>removeFromCart(id)}  src={assets.remove_icon_red} alt="" />
                 <p>{cartItems[id]}</p>
                 <img className="cursor-pointer size-9 p-1" onClick={()=>addToCart(id)} src={assets.add_icon_green} alt="" />

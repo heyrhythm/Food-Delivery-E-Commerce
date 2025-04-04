@@ -56,8 +56,8 @@ const MobileNav = () => {
             )}
 
             {/* Navigation Links */}
-            <div ref={navRef} className={`mt-19 fixed top-0 left-0 w-2/4 bg-white shadow-md h-full z-40 transition-transform transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                <ul className="flex flex-col gap-6 text-[#49557e] font-normal cursor-pointer font-[outfit] p-4">
+            <div ref={navRef} className={`mt-15 fixed top-0 left-0 w-2/4 bg-white shadow-md h-full z-40 transition-transform transform ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+                <ul className="flex flex-col gap-6 text-[#49557e] font-normal cursor-pointer font-[outfit] mt-6 px-4">
                     {nav.map((item, index) => (
                         <li
                             key={index}
