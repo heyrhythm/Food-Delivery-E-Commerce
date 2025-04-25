@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../../userApi"; // Import API function
 
-const SignUp = () => {
+const SignUp = ({closeModal, openLogin}) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "", // ✅ Change "username" to "name"
@@ -19,6 +19,7 @@ const SignUp = () => {
     try {
       await registerUser(formData); // ✅ Use registerUser() instead of axios.post()
       alert("Account created successfully");
+      closeModal(); // Close the modal
       navigate("/"); // Redirect to homepage or login
     } catch (error) {
       alert(error.response?.data?.message || "An error occurred");
@@ -26,10 +27,15 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 ">
-      <div className="w-1/3 mx-auto mt-20 mb-8 p-6 border-2 border-gray-300 rounded-lg bg-white shadow-lg">
+    <div className="flex fixed inset-0 z-50 justify-center items-center  bg-black/30 backdrop-blur-sm ">
+      <div className="bg-white rounded-2xl p-6  shadow-xl relative max-w-md w-full">
+        <button
+          onClick={closeModal}
+          className="absolute top-2 right-4 text-4xl text-gray-400 hover:text-gray-600">
+            &times;
+          </button>
         <h2 className="font-bold text-2xl text-center mb-6 text-gray-800">Sign Up</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             type="text"
             name="name" // ✅ Changed "username" to "name"
@@ -61,9 +67,11 @@ const SignUp = () => {
 
           <p className="text-sm text-center text-gray-700 mt-4">
             Already have an account?
-            <Link to="/login" className="text-orange-500 cursor-pointer ml-1 hover:underline">
+            <span
+            onClick={openLogin}
+            className="text-orange-500 cursor-pointer ml-1 hover:underline">
               Log in here
-            </Link>
+            </span>
           </p>
         </form>
       </div>

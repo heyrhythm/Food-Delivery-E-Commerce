@@ -15,6 +15,7 @@ const MobileNav = () => {
         { title: "Menu", path: "/menu" },
         { title: "Mobile App", path: "/mobileapp" },
         { title: "Contact Us", path: "/contactus" },
+        { title: "Cart", path: "/cart" },
     ];
 
     const navRef = useRef();
@@ -36,7 +37,7 @@ const MobileNav = () => {
 
     return (
         <>
-            <div className='flex justify-between sm:hidden p-4 fixed top-0 left-0 w-full bg-white shadow-md z-50'>
+            <div className='flex justify-between md:hidden p-4 fixed top-0 left-0 w-full bg-white shadow-md z-50'>
                 {/* Logo */}
                 <Link to="/">
                     <img src={assets.logo} alt="Logo" className="h-7" />

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import MobileNav from "./MobileNav";
+import SignUp from "../Pages/SignUp";
 
-const Navbar = () => {
+const Navbar = ({setShowSignup,setShowLogin}) => {
   const [menu, setMenu] = useState("home");
-
+  
   const navLinks = [
     { title: "Home", path: "/" },
     { title: "Menu", path: "/menu" },
@@ -44,14 +45,15 @@ const Navbar = () => {
             <Link to="/cart"><img src={assets.basket_icon} alt="Cart" className="w-6 h-6 cursor-pointer" /></Link>
             {/* <div className="absolute min-w-[10px] min-h-[10px] bg-[tomato] rounded-full top-[-5px] right-[-5px]"></div> */}
           </div>
-          <Link to ="/signup">
-          <button className="border border-tomato bg-transparent rounded-full px-4 py-1 text-[#49557E] text-[0.9rem] transition duration-300 hover:bg-[#fff4f2]">
-            Sign in
+           <button 
+           onClick={() => setShowSignup(true)}
+           className="border border-tomato bg-transparent rounded-full px-4 py-1 text-[#49557E] text-[0.9rem] transition duration-300 hover:bg-[#fff4f2]">
+            Sign up
           </button>
-          </Link>
+          </div>
         </div>
-      </div>
     </nav>
+    
     <MobileNav/>
     </>
   );
