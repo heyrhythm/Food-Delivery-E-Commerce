@@ -20,7 +20,6 @@ import Footbar from "./Components/Footbar";
 const App = () => {
   return (
       <div className="consistent-scrollbar">
-        <Navbar />
         
         <div className="w-[90%] md:w-[80%] mx-auto"> {/* Center the content */}
           <Routes>

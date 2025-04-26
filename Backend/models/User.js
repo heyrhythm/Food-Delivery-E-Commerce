@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
     name:{type: String , required:true},
     email:{type:String, required:true , unique:true},
     password:{type:String, required:true},
-    resetToken:{type:String, default:''}
+    resetToken:{type:String, default:''},
+    googleId:{type:String, default:''},
 });
 
 UserSchema.pre('save',async function(next){

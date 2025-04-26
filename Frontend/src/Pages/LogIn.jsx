@@ -8,8 +8,20 @@ const LogIn = ({ closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Placeholder login logic
+    try {
+      // Send the login request to the backend
+      const response = await axios.post('/login', formData, { withCredentials: true });
+      console.log(response.data); // Handle the response (e.g., save token, redirect, etc.)
+      
+      // Close modal on successful login
     alert("Logged in!");
     closeModal();
+  }
+  catch (err) {
+    // Handle any errors that occur during login
+    console.error("Login error:", err);
+    setError("Invalid email or password.");
+  }
   };
 
   return (
@@ -26,6 +38,7 @@ const LogIn = ({ closeModal }) => {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
+           id="login-email"
             type="email"
             name="email"
             placeholder="Your Email"
@@ -34,6 +47,7 @@ const LogIn = ({ closeModal }) => {
             required
           />
           <input
+          id="login-password"
             type="password"
             name="password"
             placeholder="Your Password"
@@ -41,6 +55,7 @@ const LogIn = ({ closeModal }) => {
             onChange={handleChange}
             required
           />
+          {error && <p className="text-red-500 text-sm">{error}</p>} {/* Display error message */}
           <button type="submit" className="bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition">
             Log In
           </button>

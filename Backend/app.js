@@ -4,15 +4,34 @@ const dotenv = require('dotenv');
 const cors = require ('cors');
 const connectDB = require("./Config/db");
 const authroutes = require("./routes/userRoutes");
+const bodyParser = require("body-parser");
+const searchRoutes = require("./routes/search")
 
 dotenv.config();
 const app = express();
+const port = 5000;
 
 app.use(express.json());
-app.use(cors({origin:"http://localhost:5173",
+app.use(
+    cors({
+     origin:process.env.FRONTEND_URL || "http://localhost:5173",
      methods: "GET, POST , PUT , DELETE",
      credentials: true}));
 
+ app.use(bodyParser.json()); 
+ mongoose.set('strictQuery', true);   
+
+ mongoose.connect(process.env.MONG0_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
+
+  // Routes
+app.use("/api/search", searchRoutes);
 app.use("/api/auth", authroutes);
 
 app.get("/",(req,res) =>

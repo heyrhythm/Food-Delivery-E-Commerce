@@ -1,11 +1,16 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {OAuth2Client} = require("google-auth-library");
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 const cors = require("cors"); // ✅ Added CORS middleware
 const User = require("../models/User");
 const authenticationToken = require("../middleware/authMiddleware");
 
 const router = express.Router();
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // ✅ Use CORS middleware instead of manual headers
 router.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -70,6 +75,80 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Google Login Route
+
+router.post("/google-login", async (req, res) => {
+  const { tokenId } = req.body;
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: tokenId ,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const { email, name, sub: googleId } = payload;
+
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = new User({ name, email, googleId });
+      await user.save();
+    }
+
+    // Generate a JWT Token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "your_secret_key", {
+      expiresIn: "1h",
+    });
+
+    // Set cookie
+res.cookie('token', token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
+  sameSite: 'None', // Allow third-party cookies
+});
+
+    res.status(200).json({ message: "Login successful", token, user });
+  } catch (error) {
+    res.status(500).json({ message: "Error logging in with Google", error: error.message });
+  }
+});
+
+// Password Reset Request Route
+router.post('/reset-password-request', async (req, res) => {
+  const { email } = req.body;
+  try {
+      const user = await User.findOne({ email });
+      if (!user) return res.status(404).json({ message: 'User not found' });
+
+      // Generate a reset token
+      const resetToken = crypto.randomBytes(20).toString('hex');
+      const resetTokenExpiration = Date.now() + 3600000;
+      user.resetToken = resetToken;
+      user.resetTokenExpiration = resetTokenExpiration;
+      await user.save();
+
+      // Send reset token via email (using nodemailer)
+      const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASS,
+          },
+      });
+
+      const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: email,
+          subject: 'Password Reset Request',
+          text: `To reset your password, use the following token: ${resetToken}`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+          if (error) return res.status(500).json({ message: 'Error sending email', error });
+          res.status(200).json({ message: 'Password reset token sent to email' });
+      });
+  } catch (error) {
+      res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 // Get User Profile (Protected Route)
 router.get("/me", authenticationToken, async (req, res) => {
   try {
