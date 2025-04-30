@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react"; // Import useContext
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import MobileNav from "./MobileNav";
+import { StoreContext } from "../Context/StoreContext"; // Import StoreContext
 import { food_list } from "../assets/assets";
 
 const Navbar = ({ setShowSignup, setShowLogin }) => {
@@ -9,6 +10,8 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
   const [searchQuery, setSearchQuery] = useState(""); // Manage search input
   const [filteredResults, setFilteredResults] = useState([]);
   const [debouncedQuery, setDebouncedQuery] = useState(searchQuery);
+
+  const { getCartCount } = useContext(StoreContext); // Accessing the cart count from StoreContext
 
   const navLinks = [
     { title: "Home", path: "/" },
@@ -113,12 +116,19 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
               <p className="text-center text-gray-500 mt-2">No results found</p>
             )}
           </div>
-          
+
           {/* Icons and Sign In Button */}
           <div className="flex items-center gap-6">
             <div className="relative">
               <Link to="/cart">
                 <img src={assets.basket_icon} alt="Cart" className="w-6 h-6 cursor-pointer" />
+                {/* Cart Count Badge */}
+                {getCartCount() > 0 && (
+                 <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                 {getCartCount()}
+               </span>
+               
+                )}
               </Link>
             </div>
             <button
