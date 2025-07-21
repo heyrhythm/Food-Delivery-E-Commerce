@@ -1,43 +1,53 @@
 import { createContext, useEffect, useState } from "react";
-import { food_list } from "../assets/assets";
+import { food_list } from "../assets/assets"; // Ensure this path is correct
 
-export const StoreContext = createContext(null)
+export const StoreContext = createContext();
 
-const StoreContextProvider = (props)=>{
- const [cartItems,setCartItems]=useState({});
+const StoreContextProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState({});
 
- const addToCart=(itemId)=>{
-    if(!cartItems[itemId]){
-        setCartItems((prev)=>({...prev,[itemId]:1}))
-    }
-    else{
-        setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
-    }
+  const addToCart = (itemId) => {
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: prev[itemId] ? prev[itemId] + 1 : 1,
+    }));
+  };
 
- }
+  const removeFromCart = (itemId) => {
+    setCartItems((prev) => {
+      if (!prev[itemId]) return prev;
+      const updated = { ...prev };
+      if (updated[itemId] === 1) {
+        delete updated[itemId];
+      } else {
+        updated[itemId] -= 1;
+      }
+      return updated;
+    });
+  };
 
- const removeFromCart = (itemId)=>{
-    setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
- }
+  useEffect(() => {
+    console.log("Cart updated:", cartItems);
+  }, [cartItems]);
 
- useEffect(()=>{
- console.log(cartItems);
- },[cartItems])
+  const getCartCount = () => {
+    return Object.values(cartItems).reduce((acc, count) => acc + count, 0);
+  };
 
+  const contextValue = {
+    food_list,
+    cartItems,
+    setCartItems,
+    addToCart,
+    removeFromCart,
+    getCartCount, 
+  };
 
-    const contextvalue={
-        food_list,
-        cartItems,
-        setCartItems,
-        addToCart,
-        removeFromCart
+  return (
+    <StoreContext.Provider value={contextValue}>
+      {children}
+    </StoreContext.Provider>
+  );
+};
 
-    }
-    return (
-        <StoreContext.Provider value={contextvalue}>
-            {props.children}
-        </StoreContext.Provider>
-    )
-
-}
-export default StoreContextProvider
+export default StoreContextProvider;

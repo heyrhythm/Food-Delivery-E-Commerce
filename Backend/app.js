@@ -23,7 +23,7 @@ app.use(
 
  mongoose.connect(process.env.MONG0_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("Connected to MongoDB");
+    console.log(" MongoDB connected successfully");
   })
   .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
@@ -33,6 +33,9 @@ app.use(
   // Routes
 app.use("/api/search", searchRoutes);
 app.use("/api/auth", authroutes);
+
+const cartRoutes = require('./routes/cartRoute');
+app.use('/api/cart', cartRoutes);
 
 app.get("/",(req,res) =>
     {
